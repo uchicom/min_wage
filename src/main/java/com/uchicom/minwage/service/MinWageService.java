@@ -3,10 +3,8 @@ package com.uchicom.minwage.service;
 
 import com.uchicom.minwage.enumeration.Prefecture;
 import com.uchicom.minwage.model.MinWage;
-import com.uchicom.minwage.model.WageFactory;
+import com.uchicom.minwage.model.MinWageCreator;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -14,20 +12,19 @@ import javax.inject.Inject;
 public class MinWageService {
 
   private final PdfService pdfService;
-  private final WageFactory wageFactory;
+  private final MinWageCreator minWageCreator;
 
   @Inject
-  public MinWageService(PdfService pdfService, WageFactory wageFactory) {
+  public MinWageService(PdfService pdfService, MinWageCreator minWageCreator) {
     this.pdfService = pdfService;
-    this.wageFactory = wageFactory;
+    this.minWageCreator = minWageCreator;
   }
 
   public MinWage getMinWage() throws IOException, InterruptedException {
     var text = pdfService.getPdfText();
-    Files.write(Path.of("./test1.txt"), List.of(text));
     var cleanList = clean(text);
     var relocationList = relocation(cleanList);
-    return wageFactory.createMinWage(relocationList);
+    return minWageCreator.createMinWage(relocationList);
   }
 
   List<String> clean(String text) {

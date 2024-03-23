@@ -15,9 +15,9 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 
-public class WageFactoryTest extends AbstractTest {
+public class MinWageCreatorTest extends AbstractTest {
 
-  @InjectMocks @Spy WageFactory factory;
+  @InjectMocks @Spy MinWageCreator creator;
 
   @Captor ArgumentCaptor<String> amountCaptor;
   @Captor ArgumentCaptor<String> publicationDateCaptor;
@@ -27,12 +27,12 @@ public class WageFactoryTest extends AbstractTest {
     // mock
     var minimumWage = new MinimumWage();
     doReturn(minimumWage)
-        .when(factory)
+        .when(creator)
         .createMinimumWage(amountCaptor.capture(), publicationDateCaptor.capture());
 
     // test
     var result =
-        factory.createMinWage(
+        creator.createMinWage(
             List.of(
                 "北海道637平成14年10月1日637平成14年10月1日638平成16年10月1日641平成17年10月1日644平成18年10月1日",
                 "北海道654平成19年10月19日667平成20年10月19日678平成21年10月10日691平成22年10月15日",
@@ -101,8 +101,8 @@ public class WageFactoryTest extends AbstractTest {
 
   @Test
   public void createMinimumWage() {
-    var result1 = factory.createMinimumWage("1000", "令和1年1月1日");
-    var result2 = factory.createMinimumWage("1001", "平成31年12月31日");
+    var result1 = creator.createMinimumWage("1000", "令和1年1月1日");
+    var result2 = creator.createMinimumWage("1001", "平成31年12月31日");
 
     // assert
     assertThat(result1.amount).isEqualTo(1000);

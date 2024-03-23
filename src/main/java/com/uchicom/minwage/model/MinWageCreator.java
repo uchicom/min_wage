@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 
-public class WageFactory {
+public class MinWageCreator {
   Pattern pattern =
       Pattern.compile(
           "^([^0-9]+)([0-9]+)([^日]+日)([0-9]+)?([^日]+日)?([0-9]+)?([^日]+日)?([0-9]+)?([^日]+日)?([0-9]+)?([^日]+日)?$");
@@ -26,7 +26,7 @@ public class WageFactory {
           .withResolverStyle(ResolverStyle.LENIENT);
 
   @Inject
-  public WageFactory() {}
+  public MinWageCreator() {}
 
   public MinWage createMinWage(List<String> cleanList) {
 

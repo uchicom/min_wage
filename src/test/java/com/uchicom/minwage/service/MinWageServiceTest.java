@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 
 import com.uchicom.minwage.AbstractTest;
 import com.uchicom.minwage.model.MinWage;
-import com.uchicom.minwage.model.WageFactory;
+import com.uchicom.minwage.model.MinWageCreator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -19,7 +19,7 @@ import org.mockito.Spy;
 public class MinWageServiceTest extends AbstractTest {
 
   @Mock PdfService pdfService;
-  @Mock WageFactory wageFactory;
+  @Mock MinWageCreator minWageCreator;
 
   @InjectMocks @Spy MinWageService service;
 
@@ -37,7 +37,7 @@ public class MinWageServiceTest extends AbstractTest {
     var relocationList = List.of("test3");
     doReturn(relocationList).when(service).relocation(cleanListCaptor.capture());
     var minWage = mock(MinWage.class);
-    doReturn(minWage).when(wageFactory).createMinWage(relocationListCaptor.capture());
+    doReturn(minWage).when(minWageCreator).createMinWage(relocationListCaptor.capture());
 
     // test
     var result = service.getMinWage();
