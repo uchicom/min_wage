@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.uchicom</groupId>
   <artifactId>minwage</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotless.version>2.43.0</spotless.version>
@@ -17,7 +17,7 @@
     <dependency>
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
-      <version>3.0.1</version>
+      <version>3.0.2</version>
     </dependency>
     <dependency>
       <groupId>com.google.dagger</groupId>
@@ -229,7 +229,7 @@
                     <rule>
                       <element>CLASS</element>
                       <includes>
-                        <include>com.uchicom.minwage.*</include>
+                        <include>com.uchicom.minwage.model.*</include>
                       </includes>
                       <excludes>
                         <exclude>**_Factory**</exclude>
@@ -242,12 +242,37 @@
                         <limit>
                           <counter>LINE</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.9</minimum>
+                          <minimum>1.0</minimum>
                         </limit>
                         <limit>
                           <counter>BRANCH</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.8</minimum>
+                          <minimum>1.0</minimum>
+                        </limit>
+                      </limits>
+                    </rule>
+                    <rule>
+                      <element>CLASS</element>
+                      <includes>
+                        <include>com.uchicom.minwage.service.*</include>
+                      </includes>
+                      <excludes>
+                        <exclude>**_Factory**</exclude>
+                        <exclude>**_*Component**</exclude>
+                        <exclude>**Dagger*</exclude>
+                        <exclude>**Abstract*</exclude>
+                        <exclude>**Test</exclude>
+                      </excludes>
+                      <limits>
+                        <limit>
+                          <counter>LINE</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>1.0</minimum>
+                        </limit>
+                        <limit>
+                          <counter>BRANCH</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>1.0</minimum>
                         </limit>
                       </limits>
                     </rule>
@@ -303,7 +328,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
